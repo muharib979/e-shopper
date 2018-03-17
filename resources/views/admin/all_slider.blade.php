@@ -34,7 +34,7 @@
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
-								  <th>Slider ID</th>>
+								  <th>Slider ID</th>
 								  <th>Slider Image</th>
 								  <th>Actions</th>
 							  </tr>

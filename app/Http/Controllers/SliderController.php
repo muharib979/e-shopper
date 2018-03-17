@@ -40,7 +40,7 @@ class SliderController extends Controller
 }
 
 		$data['slider_image']='';
-                 DB::table('tbl_products')->insert($data);
+                 DB::table('tbl_slider')->insert($data);
                  Session::put('message','Slider Added Successfully without image!!');
                  return Redirect::to('/add-slider');
 
@@ -54,4 +54,25 @@ class SliderController extends Controller
                 return view('admin_layout')
                         ->with('admin.all_slider',$manage_slider);
     }
+
+///this is active part of slider    
+    public function unactive_slider($slider_id)
+    {
+    	DB::table('tbl_slider')
+    	   ->where('slider_id',$slider_id)
+    	   ->update(['publication_status' => 0]);
+    	   Session::put('message','Slider Unactive Successfully');
+    	   return Redirect::to('/all-slider');
+    }
+    
+//this is active part of slider
+     public function active_slider($slider_id)
+    {
+    	DB::table('tbl_slider')
+    	   ->where('slider_id',$slider_id)
+    	   ->update(['publication_status' => 1]);
+    	   Session::put('message','Slider Active Successfully');
+    	   return Redirect::to('/all-slider');
+    }
 }
+

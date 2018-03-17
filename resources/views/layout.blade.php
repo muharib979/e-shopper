@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+                            <a href="{{URL::to('/')}}"><img src="images/home/logo.png" alt="" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -88,9 +88,23 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+
+                                <?php $customer_id=Session::get('customer_id'); ?>
+                                <?php if($customer_id !=NULL) { ?>
+                                     <li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                <?php } else { ?>
+
+                                <li><a href="{{URL::to('/login-check')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                <?php } ?> 
+                                
+                                <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+
+                                      
+                                   <?php if($customer_id !=NULL) { ?>
+                                <li><a href="login.html"><i class="fa fa-lock"></i> Logout</a></li>
+                                <?php } else { ?>
+                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -112,14 +126,13 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="{{URL::to('/')}}" class="active">Home</a></li>
                                 <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
                                         <li><a href="product-details.html">Product Details</a></li> 
-                                        <li><a href="checkout.html">Checkout</a></li> 
-                                        <li><a href="cart.html">Cart</a></li> 
-                                        <li><a href="login.html">Login</a></li> 
+                                        <li><a href="{URL::to('/login-check')}}">Checkout</a></li> 
+                                        <li><a href="{{URL::to('/show-cart')}}">Cart</a></li> 
                                     </ul>
                                 </li> 
                                 <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -143,73 +156,9 @@
         </div><!--/header-bottom-->
     </header><!--/header-->
     
-    <section id="slider"><!--slider-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1"></li>
-                            <li data-target="#slider-carousel" data-slide-to="2"></li>
-                        </ol>
-                        
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>Free E-Commerce Template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="{{asset('frontend/images/home/girl1.jpg')}}" class="girl img-responsive" alt="" />
-                                    <img src="{{asset('frontend/images/home/pricing.png')}}"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>100% Responsive Design</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="{{asset('frontend/images/home/girl2.jpg')}}" class="girl img-responsive" alt="" />
-                                    <img src="{{asset('frontend/images/home/pricing.png')}}"  class="pricing" alt="" />
-                                </div>
-                            </div>
-                            
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>Free Ecommerce Template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="{{asset('frontend/images/home/girl3.jpg')}}" class="girl img-responsive" alt="" />
-                                    <img src="{{asset('frontend/images/home/pricing.png')}}" class="pricing" alt="" />
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section><!--/slider-->
-    
-    <section>
-        <div class="container">
+@yield('slider');
+        <section>
+            <div class="container">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="left-sidebar">
@@ -227,7 +176,7 @@
     
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">{{$v_category->category_name}}</a></h4>
+                                    <h4 class="panel-title"><a href="{{URL::to('/product_by_category/'.$v_category->category_id)}}">{{$v_category->category_name}}</a></h4>
                                 </div>
                             </div>
                             <?php } ?>
@@ -244,7 +193,7 @@
                                                     ->get();
 
                             foreach ($all_published_manufacture as $v_manufacture) { ?> 
-                                    <li><a href="#"> <span class="pull-right">(50)</span>{{$v_manufacture->manufacture_name}}</a></li>
+                                    <li><a href="{{URL::to('/product_by_manufacture/'.$v_manufacture->manufacture_id)}}"> <span class="pull-right">(50)</span>{{$v_manufacture->manufacture_name}}</a></li>
                            <?php } ?>
                                 </ul>
                             </div>
@@ -266,15 +215,15 @@
                 </div>
                 
                 <div class="col-sm-9 padding-right">
-                    <div class="features_items"><!--features_items-->
+                    
                      
                      @yield('content')
                     
-                </div>
+                
             </div>
         </div>
-    </section>
-    
+</div>
+</section>
     <footer id="footer"><!--Footer-->
         <div class="footer-top">
             <div class="container">
